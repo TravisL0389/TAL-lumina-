@@ -1,0 +1,272 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap");
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+:root {
+  --sheet-cell-width: 7.5rem;
+  --sheet-row-height: 2.2rem;
+  --sheet-header-height: 2.3rem;
+  --sheet-index-width: 2.85rem;
+  --sheet-cell-padding-x: 0.75rem;
+  --sheet-cell-padding-y: 0.45rem;
+  --sheet-cell-font-size: 0.75rem;
+  --app-shell-padding: 1rem;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  color-scheme: light;
+  background: #f4f7fc;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(circle at top right, rgba(132, 190, 255, 0.18), transparent 20%),
+    radial-gradient(circle at 16% 12%, rgba(219, 234, 254, 0.42), transparent 26%),
+    linear-gradient(180deg, #f8fbff 0%, #f2f6fb 42%, #edf2f9 100%);
+  color: #1f2f46;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+code,
+pre,
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+::selection {
+  background: rgba(31, 111, 229, 0.24);
+  color: #ffffff;
+}
+
+.grid-surface {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 16px 34px rgba(98, 124, 163, 0.12);
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(229, 235, 244, 0.95);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(187, 198, 214, 0.95);
+  border-radius: 999px;
+  border: 2px solid rgba(229, 235, 244, 0.95);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(164, 178, 198, 1);
+}
+
+.markdown-body :where(table) {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.markdown-body :where(th, td) {
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  padding: 0.6rem 0.75rem;
+}
+
+.markdown-body :where(th) {
+  background: rgba(239, 244, 252, 1);
+}
+
+.app-root {
+  background:
+    radial-gradient(circle at top right, rgba(122, 196, 255, 0.16), transparent 18%),
+    radial-gradient(circle at 18% 16%, rgba(225, 235, 249, 0.68), transparent 24%),
+    linear-gradient(180deg, #f8fbff 0%, #f3f7fc 44%, #edf2f8 100%);
+}
+
+.workspace-main-scroll {
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.workspace-primary-grid,
+.workspace-bottom-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.sheet-grid-frame {
+  min-height: clamp(22rem, 58vh, 44rem);
+}
+
+.sheet-grid {
+  width: max-content;
+}
+
+.sheet-cell {
+  min-width: var(--sheet-cell-width);
+  min-height: var(--sheet-row-height);
+  padding: var(--sheet-cell-padding-y) var(--sheet-cell-padding-x);
+  font-size: var(--sheet-cell-font-size);
+}
+
+.sheet-cell-editor {
+  padding: var(--sheet-cell-padding-y) var(--sheet-cell-padding-x);
+  font-size: var(--sheet-cell-font-size);
+}
+
+.toolbar-shell,
+.formula-shell {
+  width: 100%;
+}
+
+.workspace-edge-tab {
+  position: absolute;
+  top: 1.25rem;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(215, 229, 255, 1);
+  background: rgba(255, 255, 255, 0.96);
+  color: #1f6fe5;
+  box-shadow: 0 12px 24px rgba(148, 163, 184, 0.14);
+  border-radius: 999px;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(12px);
+}
+
+.workspace-edge-tab-left {
+  left: 0.5rem;
+}
+
+.workspace-edge-tab-right {
+  right: 0.5rem;
+}
+
+.workspace-bottom-reveal {
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 1025px) {
+  .workspace-primary-grid {
+    grid-template-columns: minmax(0, 1.32fr) minmax(20rem, 24rem);
+    align-items: stretch;
+  }
+
+  .workspace-bottom-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem);
+    align-items: start;
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --sheet-cell-width: 6.8rem;
+    --sheet-row-height: 2.05rem;
+    --sheet-header-height: 2.15rem;
+    --sheet-index-width: 2.6rem;
+    --sheet-cell-padding-x: 0.65rem;
+    --sheet-cell-font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --sheet-cell-width: 6.1rem;
+    --sheet-row-height: 2rem;
+    --sheet-header-height: 2.05rem;
+    --sheet-index-width: 2.35rem;
+    --sheet-cell-padding-x: 0.55rem;
+    --sheet-cell-font-size: 0.7rem;
+    --app-shell-padding: 0.875rem;
+  }
+
+  .sheet-grid-frame {
+    min-height: clamp(18rem, 48vh, 28rem);
+  }
+
+  .workspace-edge-tab {
+    top: 0.75rem;
+    padding: 0.55rem 0.8rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --sheet-cell-width: 5.35rem;
+    --sheet-row-height: 1.9rem;
+    --sheet-header-height: 2rem;
+    --sheet-index-width: 2.15rem;
+    --sheet-cell-padding-x: 0.45rem;
+    --sheet-cell-padding-y: 0.35rem;
+    --sheet-cell-font-size: 0.67rem;
+    --app-shell-padding: 0.75rem;
+  }
+
+  .sheet-grid-frame {
+    min-height: clamp(16rem, 44vh, 24rem);
+  }
+
+  .workspace-primary-grid,
+  .workspace-bottom-grid {
+    gap: 0.875rem;
+  }
+
+  .workspace-edge-tab {
+    position: static;
+    margin-bottom: 0.75rem;
+    width: fit-content;
+  }
+
+  .workspace-edge-tab-left,
+  .workspace-edge-tab-right {
+    left: auto;
+    right: auto;
+  }
+
+  .workspace-bottom-reveal {
+    justify-content: stretch;
+  }
+}
